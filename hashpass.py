@@ -25,7 +25,7 @@ def ensure_bytes(value: AnyStr) -> bytes:
 def bytes_to_big_endian_large_int(b: ByteString) -> int:
     result = 0
     for v in b:
-        result = result*256+v
+        result = result * 256 + v
     return result
 
 
@@ -53,7 +53,7 @@ def derive(master_password: str, domain: str, user: str, counter: int, length: i
 
 def write_test_file(filename, seed=0xCAD0981F):
     domains = ['google', 'abc', '163', '招商银行', '🤦🏼‍♂️', 'Ç']
-    users = ['rsy', 'blahblah']
+    users = ['rsy', 'blah96']
     obj = []
     state = random.Random(seed)
     charset = string.printable
