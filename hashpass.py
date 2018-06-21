@@ -43,6 +43,9 @@ def derive(master_password: str, domain: str, user: str, counter: int, length: i
     hash_int = bytes_to_big_endian_large_int(hash_bytes)
     result = [None] * length
     for i in range(length):
+        if not hash_int:
+            raise ValueError(
+                f'Entropy exhausted. Requested derived password too long (len={length}).')
         hash_int, residue = divmod(hash_int, len(charset))
         result[i] = charset[residue]
     return ''.join(result)
