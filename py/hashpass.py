@@ -9,7 +9,7 @@ import json
 from typing import *
 
 BACKEND = default_backend()
-N = 16384
+N = 65536
 R = 8
 P = 1
 NUM_OCTATS = 16

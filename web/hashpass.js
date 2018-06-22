@@ -26,7 +26,7 @@ function hashpass_derive(master_password, domain, user, counter, length, charset
     salt.set(user, domain.length + 1)
     salt[salt.length - 1] = counter
 
-    scrypt(master_password, salt, { N: 16384, r: 8, p: 1, dkLen: 16, encoding: 'binary' },
+    scrypt(master_password, salt, { N: 65536, r: 8, p: 1, dkLen: 16, encoding: 'binary' },
         function (hashed) {
             let buffer = new Array(length);
             for (let i = 0; i < length; ++i) {
