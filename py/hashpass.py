@@ -71,7 +71,8 @@ def write_test_file(filename, seed=0xCAD0981F):
                         'derived': derive(master_password, d, u, counter, length, charset)
                         })
     with open(filename, 'w') as f:
-        json.dump(obj, f, ensure_ascii=False, indent=4)
+        json.dump({'charset': charset, 'objects': obj},
+                  f, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':

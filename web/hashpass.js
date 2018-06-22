@@ -1,10 +1,19 @@
 'use strict';
-const scrypt = require('scrypt-async');
-
 const text_encoder = new TextEncoder()
 
 function to_bytes(string) {
     return text_encoder.encode(string.normalize('NFKC'))
+}
+
+function large_divmod(large_dividend, divisor) {
+    divisor = divisor | 0;
+    let remainder = 0;
+    for (let i = 0; i < large_dividend.length; ++i) {
+        let x = (remainder << 8) | large_dividend[i];
+        large_dividend[i] = x / divisor;
+        remainder = x % divisor;
+    }
+    return remainder;
 }
 
 function hashpass_derive(master_password, domain, user, counter, length, charset, callback) {
@@ -18,9 +27,11 @@ function hashpass_derive(master_password, domain, user, counter, length, charset
     salt[salt.length - 1] = counter
 
     scrypt(master_password, salt, { N: 16384, r: 8, p: 1, dkLen: 16, encoding: 'binary' },
-        function (result) {
-            console.log(result);
+        function (hashed) {
+            let buffer = new Array(length);
+            for (let i = 0; i < length; ++i) {
+                buffer[i] = charset[large_divmod(hashed, charset.length)];
+            }
+            callback(buffer.join(''));
         });
 }
-
-hashpass_derive("f", "google", "rsy", 1, 9, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c');

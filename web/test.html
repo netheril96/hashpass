@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <script src="./scrypt-async.min.js" defer></script>
+    <script src="./hashpass.js" defer></script>
+</head>
+
+<body>
+    <p id="HHH">Hello, world!</p>
+    <script>
+        fetch('./test.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                let charset = myJson.charset;
+                let objs = myJson.objects;
+                HHH.innerText = 'charset=' + JSON.stringify(charset) + '\n';
+
+                for (let o of objs) {
+                    hashpass_derive(o.master_password, o.domain, o.user, o.counter, o.length, charset, function (result) {
+                        if (result != o.derived) {
+                            HHH.innerText += 'Test failed for ' + o + '\n';
+                        } else {
+                            HHH.innerText += 'Test passed\n';
+                        }
+                    })
+                }
+            });
+    </script>
+</body>
+
+</html>
