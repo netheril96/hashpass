@@ -20,41 +20,11 @@
         crossorigin="anonymous" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous" defer></script>
-    <script src="./scrypt-async.min.js" defer></script>
-    <script defer>
-        'use strict';
-
-        text_encoder = new TextEncoder()
-
-        function to_bytes(string) {
-            return text_encoder.encode(string.normalize('NFKC'))
-        }
-
-        function hashpass_derive(master_password, domain, user, counter, length, charset, callback) {
-            if (counter < 0 || counter > 255) throw new RangeError('Counter must be in range [0, 255]');
-            master_password = to_bytes(master_password)
-            domain = to_bytes(domain)
-            user = to_bytes(user)
-            salt = new Uint8Array(domain.length + user.length + 3)
-            salt.set(domain, 0)
-            salt.set(user, domain.length + 1)
-            salt[salt.length - 1] = counter
-
-            scrypt(master_password, salt, { N: 16384, r: 8, p: 1, dkLen: 16, encoding: 'binary' },
-                function (result) {
-
-                });
-        }
-    </script>
+    <script src="js/hashpass.js"></script>
 </head>
 
 <body>
     <h1>Hello, world!</h1>
-    <script>
-        scrypt("f", "google", { N: 16384, r: 8, p: 1, dkLen: 16, encoding: 'binary' },
-            function (result) { document.write(result); });
-    </script>
-
 </body>
 
 </html>
