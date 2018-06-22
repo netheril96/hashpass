@@ -14,17 +14,68 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous" defer></script>
-    <script src="js/hashpass.js"></script>
+        crossorigin="anonymous" defer></script> -->
+    <script src="./scrypt-async.min.js" defer></script>
+    <script src="./hashpass.js" defer></script>
+    <script>
+        'use strict';
+
+        const NUMBER_CHARSET = '0123456789';
+        const LOWERCASE_CHARSET = 'abcdefghijklmnopqrstuvwxyz';
+        const LETTER_CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const ALPHANUM_CHARSET = NUMBER_CHARSET + LETTER_CHARSET;
+        const FULL_CHARSET = ALPHANUM_CHARSET + '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+
+        function onCalculateClicked() {
+            if (masterPasswordInput.value !== masterPasswordAgainInput.value) {
+                alert('Master password and its repeatition are not the same!');
+                return;
+            }
+            hashpass_derive(masterPasswordInput.value, domainInput.value, userInput.value, counterInput.value, lengthInput.value, ALPHANUM_CHARSET, function (result) {
+                derivedOutput.value = result;
+            });
+        }
+    </script>
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
+    <div id="allContentDiv">
+        <div>
+            <label for="masterPasswordInput">Master Password:</label>
+            <input type="password" id="masterPasswordInput" name="masterPasswordInput">
+        </div>
+        <div>
+            <label for="masterPasswordAgainInput">Repeat Password:</label>
+            <input type="password" id="masterPasswordAgainInput" name="masterPasswordAgainInput">
+        </div>
+        <div>
+            <label for="domainInput">Domain:</label>
+            <input type="text" id="domainInput" name="domainInput">
+        </div>
+        <div>
+            <label for="userInput">User:</label>
+            <input type="text" id="userInput" name="userInput">
+        </div>
+        <div>
+            <label for="counterInput">Counter:</label>
+            <input type="number" id="counterInput" name="counterInput" value="0">
+        </div>
+        <div>
+            <label for="lengthInput">Length:</label>
+            <input type="number" id="lengthInput" name="lengthInput" value="14">
+        </div>
+        <div>
+            <label for="derivedOutput">Derived:</label>
+            <input type="text" id="derivedOutput" name="derivedOutput" value="" disabled>
+        </div>
+        <button id="calculateBtn" class="btn btn-light" onclick="onCalculateClicked()">Calculate</button>
+    </div>
+
 </body>
 
 </html>
