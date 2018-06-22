@@ -30,15 +30,28 @@
         const LETTER_CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const ALPHANUM_CHARSET = NUMBER_CHARSET + LETTER_CHARSET;
         const FULL_CHARSET = ALPHANUM_CHARSET + '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+        const CHARSET_MAPPING = {
+            Numbers: NUMBER_CHARSET,
+            Lowercase: LOWERCASE_CHARSET,
+            Letters: LETTER_CHARSET,
+            Alphanumeric: ALPHANUM_CHARSET,
+            Full: FULL_CHARSET
+        }
 
         function onCalculateClicked() {
             if (masterPasswordInput.value !== masterPasswordAgainInput.value) {
                 alert('Master password and its repeatition are not the same!');
                 return;
             }
-            hashpass_derive(masterPasswordInput.value, domainInput.value, userInput.value, counterInput.value, lengthInput.value, ALPHANUM_CHARSET, function (result) {
-                derivedOutput.value = result;
-            });
+            hashpass_derive(masterPasswordInput.value,
+                domainInput.value,
+                userInput.value,
+                counterInput.value,
+                lengthInput.value,
+                CHARSET_MAPPING[charsetDropdown.options[charsetDropdown.selectedIndex].value],
+                function (result) {
+                    derivedOutput.value = result;
+                });
         }
     </script>
 </head>
@@ -68,6 +81,16 @@
         <div>
             <label for="lengthInput">Length:</label>
             <input type="number" id="lengthInput" name="lengthInput" value="14">
+        </div>
+        <div>
+            <label for="charsetDropdown">Charset:</label>
+            <select id="charsetDropdown">
+                <option value="Numbers">Numbers</option>
+                <opton value="Lowercase">Lowercase letters</opton>
+                <option value="Letters">Letters</option>
+                <option value="Alphanumeric" selected>Alphanumeric</option>
+                <option value="Full">Full</option>
+            </select>
         </div>
         <div>
             <label for="derivedOutput">Derived:</label>
