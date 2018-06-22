@@ -8,6 +8,23 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./bootstrap.min.css">
+    <style>
+        #allContentDiv {
+            margin: auto;
+            width: 25%;
+            padding: 70px 0;
+        }
+
+        input,
+        select {
+            float: right;
+        }
+
+        #calculateBtn {
+            margin: auto;
+            width: 100%;
+        }
+    </style>
 
     <title>Hashpass</title>
 
@@ -52,6 +69,17 @@
                     derivedOutput.value = result;
                 });
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            for (let i of [masterPasswordAgainInput, masterPasswordInput, domainInput, userInput]) {
+                i.addEventListener('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        e.preventDefault();
+                        onCalculateClicked();
+                    }
+                });
+            }
+        }, false);
     </script>
 </head>
 
