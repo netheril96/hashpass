@@ -8,24 +8,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./bootstrap.min.css">
-    <style>
-        #allContentDiv {
-            margin: auto;
-            width: 25%;
-            padding: 70px 0;
-        }
-
-        input,
-        select {
-            float: right;
-        }
-
-        #calculateBtn {
-            margin: auto;
-            width: 100%;
-        }
-    </style>
-
     <title>Hashpass</title>
 
     <!-- Optional JavaScript -->
@@ -84,46 +66,90 @@
 </head>
 
 <body>
-    <div id="allContentDiv">
-        <div>
-            <label for="masterPasswordInput">Master Password:</label>
-            <input type="password" id="masterPasswordInput" name="masterPasswordInput">
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <label for="masterPasswordInput">Master Password:</label>
+            </div>
+            <div class="col">
+                <input type="password" id="masterPasswordInput" name="masterPasswordInput">
+            </div>
         </div>
-        <div>
-            <label for="masterPasswordAgainInput">Repeat Password:</label>
-            <input type="password" id="masterPasswordAgainInput" name="masterPasswordAgainInput">
+
+        <div class="row">
+            <div class="col">
+                <label for="masterPasswordAgainInput">Repeat Password:</label>
+            </div>
+            <div class="col">
+                <input type="password" id="masterPasswordAgainInput" name="masterPasswordAgainInput">
+            </div>
         </div>
-        <div>
-            <label for="domainInput">Domain:</label>
-            <input type="text" id="domainInput" name="domainInput">
+
+        <div class="row">
+            <div class="col">
+                <label for="domainInput">Domain:</label>
+            </div>
+            <div class="col">
+                <input type="text" id="domainInput" name="domainInput">
+            </div>
         </div>
-        <div>
-            <label for="userInput">User:</label>
-            <input type="text" id="userInput" name="userInput">
+
+        <div class="row">
+            <div class="col">
+                <label for="userInput">User:</label>
+            </div>
+            <div class="col">
+                <input type="text" id="userInput" name="userInput">
+            </div>
         </div>
-        <div>
-            <label for="counterInput">Counter:</label>
-            <input type="number" id="counterInput" name="counterInput" value="0">
+
+        <div class="row">
+            <div class="col">
+                <label for="counterInput">Counter:</label>
+            </div>
+            <div class="col">
+                <input type="number" id="counterInput" name="counterInput" value="0">
+            </div>
         </div>
-        <div>
-            <label for="lengthInput">Length:</label>
-            <input type="number" id="lengthInput" name="lengthInput" value="14">
+
+        <div class="row">
+            <div class="col">
+                <label for="lengthInput">Length:</label>
+            </div>
+            <div class="col">
+                <input type="number" id="lengthInput" name="lengthInput" value="14">
+            </div>
         </div>
-        <div>
-            <label for="charsetDropdown">Charset:</label>
-            <select id="charsetDropdown">
-                <option value="Numbers">Numbers</option>
-                <opton value="Lowercase">Lowercase letters</opton>
-                <option value="Letters">Letters</option>
-                <option value="Alphanumeric" selected>Alphanumeric</option>
-                <option value="Full">Full</option>
-            </select>
+
+        <div class="row">
+            <div class="col">
+                <label for="charsetDropdown">Charset:</label>
+            </div>
+            <div class="col">
+                <select id="charsetDropdown">
+                    <option value="Numbers">Numbers</option>
+                    <opton value="Lowercase">Lowercase letters</opton>
+                    <option value="Letters">Letters</option>
+                    <option value="Alphanumeric" selected>Alphanumeric</option>
+                    <option value="Full">Full</option>
+                </select>
+            </div>
         </div>
-        <div>
-            <label for="derivedOutput">Derived:</label>
-            <input type="text" id="derivedOutput" name="derivedOutput" value="" disabled>
+
+        <div class="row">
+            <div class="col">
+                <label for="derivedOutput">Derived:</label>
+            </div>
+            <div class="col">
+                <input type="text" id="derivedOutput" name="derivedOutput" value="" disabled>
+            </div>
         </div>
-        <button id="calculateBtn" class="btn btn-light" onclick="onCalculateClicked()">Calculate</button>
+
+        <div>
+            <button id="calculateBtn" class="btn btn-light mx-auto" onclick="onCalculateClicked()">Calculate</button>
+        </div>
+
     </div>
 
 </body>
