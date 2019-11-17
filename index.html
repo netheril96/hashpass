@@ -20,6 +20,7 @@
         crossorigin="anonymous" defer></script> -->
     <script src="./scrypt-async.min.js" defer></script>
     <script src="./hashpass.js" defer></script>
+    <script src="./clipboard.min.js" defer></script>
     <script>
         'use strict';
 
@@ -53,6 +54,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            new ClipboardJS("#copyBtn");
             for (let i of [masterPasswordAgainInput, masterPasswordInput, domainInput, userInput]) {
                 i.addEventListener('keyup', function (e) {
                     if (e.keyCode === 13) {
@@ -142,12 +144,13 @@
                 <label for="derivedOutput">Derived:</label>
             </div>
             <div class="col">
-                <input type="text" id="derivedOutput" name="derivedOutput" value="" disabled>
+                <input type="text" id="derivedOutput" name="derivedOutput" value="" readonly>
             </div>
         </div>
 
         <div>
             <button id="calculateBtn" class="btn btn-light mx-auto" onclick="onCalculateClicked()">Calculate</button>
+            <button id="copyBtn" class="btn btn-light mx-auto" data-clipboard-target="#derivedOutput">Copy</button>
         </div>
 
     </div>
