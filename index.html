@@ -54,7 +54,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            new ClipboardJS("#copyBtn");
+            let clip = new ClipboardJS("#copyBtn");
+            clip.on('success', function () { copyBtn.textContent = 'Copied!'; });
+            clip.on('error', function () { 
+                copyBtn.textContent = 'Copy failed'; 
+                console.error(e); 
+            });
             for (let i of [masterPasswordAgainInput, masterPasswordInput, domainInput, userInput]) {
                 i.addEventListener('keyup', function (e) {
                     if (e.keyCode === 13) {
